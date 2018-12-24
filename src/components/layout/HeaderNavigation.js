@@ -16,8 +16,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import CreateIcon from "@material-ui/icons/Create";
+import FilterNoneIcon from "@material-ui/icons/FilterNone";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const styles = {
   list: {
@@ -40,10 +41,7 @@ const styles = {
 
 class HeaderNavigation extends Component {
   state = {
-    top: false,
-    left: false,
-    bottom: false,
-    right: false
+    left: false
   };
 
   toggleDrawer = (side, open) => () => {
@@ -58,10 +56,10 @@ class HeaderNavigation extends Component {
     const sideList = (
       <div className={classes.list}>
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {["Cards list", "Create card"].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index % 2 === 0 ? <FilterNoneIcon /> : <CreateIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -69,14 +67,12 @@ class HeaderNavigation extends Component {
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key="logout">
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
         </List>
       </div>
     );

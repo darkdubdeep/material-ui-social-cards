@@ -14,7 +14,8 @@ class SocialCardList extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Grid container direction="row" justify="center" alignItems="center">
+        <Grid container direction="column" justify="center" alignItems="center">
+          <SocialCard />
           <SocialCard />
         </Grid>
       </div>
