@@ -12,6 +12,9 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import { connect } from "react-redux";
+import { loggIn } from "../../../store/actions/authenticationActions";
+import { withRouter } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -50,6 +53,12 @@ class LoginComponent extends Component {
 
   handleClickShowPassword = () => {
     this.setState(state => ({ showPassword: !state.showPassword }));
+  };
+
+  logIn = () => {
+    this.props.loggIn(true);
+    console.log(this.props);
+    this.props.history.push("/");
   };
 
   render() {
@@ -94,7 +103,12 @@ class LoginComponent extends Component {
           alignItems="flex-end"
           direction="column"
         />
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={this.logIn}
+        >
           Login
         </Button>
         <p>
@@ -110,7 +124,15 @@ class LoginComponent extends Component {
 }
 
 LoginComponent.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  loggIn: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(LoginComponent);
+// export default withStyles(styles)(LoginComponent);
+
+export default withRouter(
+  connect(
+    null,
+    { loggIn }
+  )(withStyles(styles)(LoginComponent))
+);

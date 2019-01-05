@@ -92,7 +92,7 @@ class HeaderNavigation extends Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Social Cards
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit">Logout</Button>
           </Toolbar>
         </AppBar>
         <SwipeableDrawer
