@@ -14,7 +14,15 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <Grid container spacing={24} justify="center">
+        <Grid
+          container
+          spacing={24}
+          justify="center"
+          style={{
+            margin: 0,
+            width: "100%"
+          }}
+        >
           <Grid item xs={12} sm={3}>
             <LoginComponent />
           </Grid>

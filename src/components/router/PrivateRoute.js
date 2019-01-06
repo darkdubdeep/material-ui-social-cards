@@ -1,11 +1,8 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Provider } from "react-redux";
 import store from "../../store/store";
-import { loggIn } from "../../store/actions/authenticationActions";
-import MainPage from "../../components/pages/MainPage";
-import LoginPage from "../../components/pages/LoginPage";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { logged } = { ...rest };
@@ -19,7 +16,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           ) : (
             <Redirect
               to={{
-                pathname: "/login"
+                pathname: "/login",
+                state: { from: props.location }
               }}
             />
           )
@@ -28,12 +26,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     </Provider>
   );
 };
-
-// const PrivateRoute = ({ component: Component, logged: logged }) => (
-//   <Provider store={store}>
-//     <Route render={() => <MainPage />} />
-//   </Provider>
-// );
 
 const mapStateToProps = state => ({
   logged: state.authentification.logged

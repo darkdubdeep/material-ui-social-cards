@@ -18,7 +18,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <Switch>
-              <PrivateRoute exact path="/" component={MainPage} logged={true} />
+              <PrivateRoute exact path="/" component={MainPage} />
             </Switch>
             <Switch>
               <Route exact path="/login" component={LoginPage} />
@@ -28,7 +28,6 @@ class App extends Component {
             </Switch>
             <Switch>
               <PrivateRoute
-                exact
                 path="/social-card-detail"
                 component={SocialCardDetail}
               />

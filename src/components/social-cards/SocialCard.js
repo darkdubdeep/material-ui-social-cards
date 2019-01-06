@@ -5,6 +5,7 @@ import Card from "@material-ui/core/Card";
 import SocialCardHeader from "./social-card-components/SocialCardHeader";
 import SocialCardMain from "./social-card-components/SocialCardMain";
 import SocialCardBottom from "./social-card-components/SocialCardBottom";
+import Grid from "@material-ui/core/Grid";
 
 const styles = () => ({
   card: {
@@ -25,11 +26,13 @@ class SocialCard extends Component {
     const { classes } = this.props;
 
     return (
-      <Card className={classes.card}>
-        <SocialCardHeader />
-        <SocialCardMain />
-        <SocialCardBottom />
-      </Card>
+      <Grid item>
+        <Card className={classes.card}>
+          <SocialCardHeader />
+          <SocialCardMain />
+          <SocialCardBottom />
+        </Card>
+      </Grid>
     );
   }
 }

@@ -11,7 +11,6 @@ import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import { loggIn } from "../../../store/actions/authenticationActions";
 import { withRouter } from "react-router-dom";
@@ -19,7 +18,8 @@ import { withRouter } from "react-router-dom";
 const styles = theme => ({
   root: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    alignSelf: "center"
   },
   fullWidth: {
     width: "100%"
@@ -55,14 +55,16 @@ class LoginComponent extends Component {
     this.setState(state => ({ showPassword: !state.showPassword }));
   };
 
-  logIn = () => {
-    this.props.loggIn(true);
-    console.log(this.props);
-    this.props.history.push("/");
-  };
-
   render() {
     const { classes } = this.props;
+
+    let from = this.props.location.state.from.pathname || "/";
+
+    this.logIn = () => {
+      this.props.loggIn(true);
+      this.props.history.push(from);
+    };
+
     return (
       <div className={classes.root}>
         <h2>Please enter your email and password</h2>
@@ -97,12 +99,6 @@ class LoginComponent extends Component {
             }
           />
         </FormControl>
-        <Grid
-          container
-          justify="flex-end"
-          alignItems="flex-end"
-          direction="column"
-        />
         <Button
           variant="contained"
           color="primary"
