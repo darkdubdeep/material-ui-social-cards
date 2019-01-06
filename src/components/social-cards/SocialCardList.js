@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import SocialCard from "./SocialCard";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
+import { getSocialCardsList } from "../../store/actions/socialCardActions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   root: {
@@ -10,8 +13,12 @@ const styles = theme => ({
 });
 
 class SocialCardList extends Component {
+  componentDidMount() {
+    this.props.getSocialCardsList();
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, socialCards } = this.props;
     return (
       <div className={classes.root}>
         <Grid
@@ -24,12 +31,25 @@ class SocialCardList extends Component {
             width: "100%"
           }}
         >
-          <SocialCard />
-          <SocialCard />
+          {socialCards.map(socialCard => (
+            <SocialCard key={socialCard.id} socialCard={socialCard} />
+          ))}
         </Grid>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(SocialCardList);
+SocialCardList.propTypes = {
+  socialCards: PropTypes.array.isRequired,
+  getSocialCardsList: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  socialCards: state.socialCards.socialCards
+});
+
+export default connect(
+  mapStateToProps,
+  { getSocialCardsList }
+)(withStyles(styles)(SocialCardList));

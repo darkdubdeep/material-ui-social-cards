@@ -14,7 +14,7 @@ const styles = () => ({
 
 class SocialCardHeader extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, title, subheader } = this.props;
     return (
       <CardHeader
         avatar={
@@ -27,8 +27,8 @@ class SocialCardHeader extends Component {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={title}
+        subheader={subheader}
       />
     );
   }

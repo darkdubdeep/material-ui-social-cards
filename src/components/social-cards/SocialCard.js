@@ -24,13 +24,29 @@ class SocialCard extends Component {
 
   render() {
     const { classes } = this.props;
-
+    const {
+      id,
+      title,
+      subheader,
+      cardMediaTitle,
+      cardMediaImage,
+      cardContentText,
+      cardBottomText,
+      isFavorite
+    } = this.props.socialCard;
     return (
       <Grid item>
         <Card className={classes.card}>
-          <SocialCardHeader />
-          <SocialCardMain />
-          <SocialCardBottom />
+          <SocialCardHeader title={title} subheader={subheader} id={id} />
+          <SocialCardMain
+            cardMediaTitle={cardMediaTitle}
+            cardMediaImage={cardMediaImage}
+            cardContentText={cardContentText}
+          />
+          <SocialCardBottom
+            cardBottomText={cardBottomText}
+            isFavorite={isFavorite}
+          />
         </Card>
       </Grid>
     );
