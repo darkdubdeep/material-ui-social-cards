@@ -58,9 +58,15 @@ class LoginComponent extends Component {
   render() {
     const { classes } = this.props;
 
-    let from = this.props.location.state.from.pathname || "/";
+    let from;
 
-    this.logIn = () => {
+    if (this.props.location.state) {
+      from = this.props.location.state.from.pathname || "/";
+    } else {
+      from = "/";
+    }
+
+    this.logginHandler = () => {
       this.props.loggIn(true);
       this.props.history.push(from);
     };
@@ -103,7 +109,7 @@ class LoginComponent extends Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          onClick={this.logIn}
+          onClick={this.logginHandler}
         >
           Login
         </Button>
@@ -123,8 +129,6 @@ LoginComponent.propTypes = {
   classes: PropTypes.object.isRequired,
   loggIn: PropTypes.func.isRequired
 };
-
-// export default withStyles(styles)(LoginComponent);
 
 export default withRouter(
   connect(

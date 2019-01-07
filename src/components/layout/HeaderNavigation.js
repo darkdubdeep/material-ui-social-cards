@@ -18,6 +18,11 @@ import CreateIcon from "@material-ui/icons/Create";
 import FilterNoneIcon from "@material-ui/icons/FilterNone";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
+import { connect } from "react-redux";
+import { loggOut } from "../../store/actions/authenticationActions";
+import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 const styles = {
   list: {
     width: 250
@@ -39,6 +44,17 @@ const styles = {
   }
 };
 
+const drawerMenuItems = [
+  {
+    name: "Cards list",
+    to: "/"
+  },
+  {
+    name: "Create card",
+    to: "/create-card"
+  }
+];
+
 class HeaderNavigation extends Component {
   state = {
     left: false
@@ -50,24 +66,33 @@ class HeaderNavigation extends Component {
     });
   };
 
+  loggOutHandler = () => {
+    this.props.loggOut(true);
+    this.props.history.push("/login");
+  };
+
+  goToCardList = () => {
+    this.props.history.push("/");
+  };
+
   render() {
     const { classes } = this.props;
 
     const sideList = (
       <div className={classes.list}>
         <List>
-          {["Cards list", "Create card"].map((text, index) => (
-            <ListItem button key={text}>
+          {drawerMenuItems.map((item, index) => (
+            <ListItem component={Link} to={item.to} button key={item.name}>
               <ListItemIcon>
                 {index % 2 === 0 ? <FilterNoneIcon /> : <CreateIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.name} />
             </ListItem>
           ))}
         </List>
         <Divider />
         <List>
-          <ListItem button key="logout">
+          <ListItem button key="logout" onClick={this.loggOutHandler}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
@@ -92,7 +117,9 @@ class HeaderNavigation extends Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Social Cards
             </Typography>
-            <Button color="inherit">Logout</Button>
+            <Button color="inherit" onClick={this.loggOutHandler}>
+              Logout
+            </Button>
           </Toolbar>
         </AppBar>
         <SwipeableDrawer
@@ -115,7 +142,13 @@ class HeaderNavigation extends Component {
 }
 
 HeaderNavigation.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  loggOut: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(HeaderNavigation);
+export default withRouter(
+  connect(
+    null,
+    { loggOut }
+  )(withStyles(styles)(HeaderNavigation))
+);
