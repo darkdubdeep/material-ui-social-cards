@@ -19,7 +19,8 @@ const styles = theme => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    alignSelf: "center"
+    alignSelf: "center",
+    marginTop: 80
   },
   fullWidth: {
     width: "100%"

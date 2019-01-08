@@ -7,20 +7,18 @@ import HeaderNavigation from "../layout/HeaderNavigation";
 import { Provider } from "react-redux";
 import store from "../../store/store";
 
-class SocialCardDetail extends Component {
+class SocialCardEdit extends Component {
   render() {
     const { id } = this.props.match.params;
-    console.log(id);
     return (
       <Provider store={store}>
         <Fragment>
           <HeaderNavigation />
-
-          <h1>Social Card Detail</h1>
-          <p>{id}</p>
+          <h1>Social Card edit</h1>
+          <h2>{id}</h2>
         </Fragment>
       </Provider>
     );
   }
 }
-export default withRouter(SocialCardDetail);
+export default withRouter(SocialCardEdit);

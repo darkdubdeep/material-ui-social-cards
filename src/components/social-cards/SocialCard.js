@@ -35,13 +35,14 @@ class SocialCard extends Component {
       isFavorite
     } = this.props.socialCard;
     return (
-      <Grid item>
+      <Grid container item xs={12} sm={6} justify="center">
         <Card className={classes.card}>
           <SocialCardHeader title={title} subheader={subheader} id={id} />
           <SocialCardMain
             cardMediaTitle={cardMediaTitle}
             cardMediaImage={cardMediaImage}
             cardContentText={cardContentText}
+            id={id}
           />
           <SocialCardBottom
             cardBottomText={cardBottomText}

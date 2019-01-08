@@ -51,7 +51,7 @@ const drawerMenuItems = [
   },
   {
     name: "Create card",
-    to: "/create-card"
+    to: "/social-card-create"
   }
 ];
 

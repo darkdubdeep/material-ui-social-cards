@@ -10,12 +10,13 @@ import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
   root: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    alignSelf: "center",
+    marginTop: 80
   },
   fullWidth: {
     width: "100%"
@@ -56,7 +57,9 @@ class RegistrationComponent extends Component {
     return (
       <div className={classes.root}>
         <h2>Please enter your information for register account</h2>
-        <FormControl className={classNames(classes.margin, classes.textField)}>
+        <FormControl
+          className={classNames(classes.textField, classes.fullWidth)}
+        >
           <InputLabel htmlFor="adornment-password">E-mail</InputLabel>
           <Input
             id="email-input"
@@ -64,7 +67,9 @@ class RegistrationComponent extends Component {
             onChange={this.handleChange("email")}
           />
         </FormControl>
-        <FormControl className={classNames(classes.margin, classes.textField)}>
+        <FormControl
+          className={classNames(classes.textField, classes.fullWidth)}
+        >
           <InputLabel htmlFor="adornment-password">Password</InputLabel>
           <Input
             id="adornment-password"
@@ -83,15 +88,9 @@ class RegistrationComponent extends Component {
             }
           />
         </FormControl>
-        <Grid container justify="flex-end" alignItems="flex-end">
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            Register
-          </Button>
-        </Grid>
+        <Button variant="contained" color="primary" className={classes.button}>
+          Register
+        </Button>
       </div>
     );
   }

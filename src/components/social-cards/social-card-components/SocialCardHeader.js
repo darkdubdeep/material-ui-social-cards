@@ -8,6 +8,8 @@ import red from "@material-ui/core/colors/red";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
+import { withRouter } from "react-router-dom";
+
 const styles = () => ({
   avatar: {
     backgroundColor: red[500]
@@ -34,8 +36,12 @@ class SocialCardHeader extends Component {
   };
 
   editCard = () => {
-    alert("Edit card");
     this.setState({ anchorEl: null });
+    console.log(this.props);
+    //should pass id
+    const { id } = this.props;
+    console.log(id);
+    this.props.history.push(`/social-card-edit/${id}`);
   };
 
   deleteCard = () => {
@@ -89,4 +95,4 @@ class SocialCardHeader extends Component {
   }
 }
 
-export default withStyles(styles)(SocialCardHeader);
+export default withRouter(withStyles(styles)(SocialCardHeader));

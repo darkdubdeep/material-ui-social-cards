@@ -9,6 +9,11 @@ import { connect } from "react-redux";
 const styles = theme => ({
   root: {
     flexGrow: 1
+  },
+  customGridWidth: {
+    [theme.breakpoints.up("lg")]: {
+      width: 900
+    }
   }
 });
 
@@ -20,22 +25,21 @@ class SocialCardList extends Component {
   render() {
     const { classes, socialCards } = this.props;
     return (
-      <div className={classes.root}>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          spacing={24}
-          style={{
-            margin: 0,
-            width: "100%"
-          }}
-        >
-          {socialCards.map(socialCard => (
-            <SocialCard key={socialCard.id} socialCard={socialCard} />
-          ))}
-        </Grid>
-      </div>
+      <Grid
+        className={classes.customGridWidth}
+        container
+        direction="row"
+        justify="center"
+        spacing={24}
+        style={{
+          margin: "auto",
+          width: "60%"
+        }}
+      >
+        {socialCards.map(socialCard => (
+          <SocialCard key={socialCard.id} socialCard={socialCard} />
+        ))}
+      </Grid>
     );
   }
 }
