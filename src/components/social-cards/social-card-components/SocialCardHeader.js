@@ -50,7 +50,7 @@ class SocialCardHeader extends Component {
   };
 
   render() {
-    const { classes, title, subheader } = this.props;
+    const { classes, title, date } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     return (
@@ -70,7 +70,7 @@ class SocialCardHeader extends Component {
             </IconButton>
           }
           title={title}
-          subheader={subheader}
+          date={date}
         />
         <Menu
           id="long-menu"

@@ -118,7 +118,7 @@ class LoginComponent extends Component {
           Login
         </Button>
         <p>
-          if you have noat an accaunt, please{" "}
+          if you have not an accaunt, please{" "}
           <span>
             <Link to="/registration">register</Link>
           </span>{" "}

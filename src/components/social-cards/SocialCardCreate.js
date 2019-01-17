@@ -24,6 +24,9 @@ import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import IconButton from "@material-ui/core/IconButton";
 
+import { connect } from "react-redux";
+import { createSocialCard } from "../../store/actions/socialCardActions";
+
 const styles = theme => ({
   container: {
     display: "flex",
@@ -71,15 +74,16 @@ class LocalizedUtils extends DateFnsUtils {
 
 class SocialCardCreate extends Component {
   state = {
+    id: new Date().getTime(),
     title: "",
-    pictures: {},
-    date: "",
+    date: null,
     selectedImageObject: null,
     previewImage: null,
-    files: [],
-    shortDescription: "",
-    additionalText: "",
-    selectedDate: new Date()
+    cardMediaImage:
+      "http://www.samiko.ru/ska/bild/sweden/Stockholm-ratusha.jpg",
+    cardContentText: "",
+    cardBottomText: "",
+    isFavorite: false
   };
 
   handleChange = name => event => {
@@ -89,7 +93,7 @@ class SocialCardCreate extends Component {
   };
 
   handleDateChange = date => {
-    this.setState({ selectedDate: date });
+    this.setState({ date: date });
   };
 
   imageSelectedHandler = event => {
@@ -99,10 +103,69 @@ class SocialCardCreate extends Component {
     });
   };
 
+  createCard = () => {
+    const {
+      id,
+      title,
+      pictures,
+      date,
+      selectedImageObject,
+      cardMediaImage,
+      previewImage,
+      cardContentText,
+      cardBottomText
+    } = this.state;
+
+    // Check For Errors
+    // if (name === "") {
+    //   this.setState({ errors: { name: "Name is required" } });
+    //   return;
+    // }
+
+    // if (email === "") {
+    //   this.setState({ errors: { email: "Email is required" } });
+    //   return;
+    // }
+
+    // if (phone === "") {
+    //   this.setState({ errors: { phone: "Phone is required" } });
+    //   return;
+    // }
+
+    const newCard = {
+      id,
+      title,
+      pictures,
+      date,
+      selectedImageObject,
+      cardMediaImage,
+      previewImage,
+      cardContentText,
+      cardBottomText
+    };
+
+    console.log(newCard);
+    this.props.createSocialCard(newCard);
+
+    // Clear State
+    this.setState({
+      id,
+      title: "",
+      pictures: {},
+      date: null,
+      selectedImageObject: null,
+      previewImage: null,
+      cardContentText: "",
+      cardBottomText: ""
+    });
+
+    this.props.history.push("/");
+  };
+
   render() {
     console.log(this.state);
     const { classes } = this.props;
-    const { selectedDate } = this.state;
+    const { date } = this.state;
     return (
       <MuiPickersUtilsProvider utils={LocalizedUtils} locale={enLocale}>
         <Provider store={store}>
@@ -140,7 +203,7 @@ class SocialCardCreate extends Component {
                     margin="normal"
                     variant="outlined"
                     label="Enter date"
-                    value={selectedDate}
+                    value={date}
                     onChange={this.handleDateChange}
                     className={classNames(classes.textField, classes.fullWidth)}
                     format="d MMM yyyy"
@@ -153,7 +216,7 @@ class SocialCardCreate extends Component {
                     className={classNames(classes.textField, classes.fullWidth)}
                     margin="normal"
                     variant="outlined"
-                    onChange={this.handleChange("shortDescription")}
+                    onChange={this.handleChange("cardContentText")}
                   />
                   <TextField
                     id="additional-text"
@@ -164,7 +227,7 @@ class SocialCardCreate extends Component {
                     className={classNames(classes.textField, classes.fullWidth)}
                     margin="normal"
                     variant="outlined"
-                    onChange={this.handleChange("additionalText")}
+                    onChange={this.handleChange("cardBottomText")}
                   />
                   <Grid
                     container
@@ -210,6 +273,7 @@ class SocialCardCreate extends Component {
                       variant="outlined"
                       color="primary"
                       className={classes.button}
+                      onClick={this.createCard}
                     >
                       Save
                     </Button>
@@ -225,7 +289,11 @@ class SocialCardCreate extends Component {
 }
 
 SocialCardCreate.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  createSocialCard: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(SocialCardCreate);
+export default connect(
+  null,
+  { createSocialCard }
+)(withStyles(styles)(SocialCardCreate));

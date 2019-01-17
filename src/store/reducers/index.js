@@ -4,5 +4,5 @@ import socialCardReducer from "./socialCardReducer";
 
 export default combineReducers({
   authentification: autentificationReducer,
-  socialCards: socialCardReducer
+  socialCard: socialCardReducer
 });

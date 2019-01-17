@@ -24,6 +24,7 @@ class SocialCardList extends Component {
 
   render() {
     const { classes, socialCards } = this.props;
+    console.log(socialCards);
     return (
       <Grid
         className={classes.customGridWidth}
@@ -50,7 +51,7 @@ SocialCardList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  socialCards: state.socialCards.socialCards
+  socialCards: state.socialCard.socialCards
 });
 
 export default connect(

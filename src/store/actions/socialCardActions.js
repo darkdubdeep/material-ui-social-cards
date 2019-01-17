@@ -12,7 +12,7 @@ export const getSocialCardsList = () => dispatch => {
     {
       id: 1,
       title: "First social card",
-      subheader: "September 14, 2019",
+      date: "September 14, 2019",
       cardMediaImage:
         "https://img1.fonwall.ru/o/dv/stockholm-panorama-stokgolm-shveciya-eq35.jpg?route=mid&amp;h=750",
       cardMediaTitle: "Stockholm",
@@ -25,7 +25,7 @@ export const getSocialCardsList = () => dispatch => {
     {
       id: 2,
       title: "Second social card",
-      subheader: "September 25, 2018",
+      date: "September 25, 2018",
       cardMediaImage:
         "https://img1.fonwall.ru/o/dv/stockholm-panorama-stokgolm-shveciya-eq35.jpg?route=mid&amp;h=750",
       cardMediaTitle: "Stockholm",
@@ -38,7 +38,7 @@ export const getSocialCardsList = () => dispatch => {
     {
       id: 3,
       title: "Third social card",
-      subheader: "September 25, 2018",
+      date: "September 25, 2018",
       cardMediaImage:
         "https://img1.fonwall.ru/o/dv/stockholm-panorama-stokgolm-shveciya-eq35.jpg?route=mid&amp;h=750",
       cardMediaTitle: "Stockholm",
@@ -54,11 +54,12 @@ export const getSocialCardsList = () => dispatch => {
     payload: res
   });
 };
-export const createSocialCard = () => dispatch => {
+export const createSocialCard = payload => dispatch => {
   // axios should be here in the future
+  console.log(payload);
   dispatch({
     type: CREATE_SOCIAL_CARD,
-    payload: true
+    payload: payload
   });
 };
 export const editSocialCard = () => dispatch => {

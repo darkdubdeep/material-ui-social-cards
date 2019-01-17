@@ -27,7 +27,7 @@ class SocialCard extends Component {
     const {
       id,
       title,
-      subheader,
+      date,
       cardMediaTitle,
       cardMediaImage,
       cardContentText,
@@ -37,7 +37,7 @@ class SocialCard extends Component {
     return (
       <Grid container item xs={12} sm={6} justify="center">
         <Card className={classes.card}>
-          <SocialCardHeader title={title} subheader={subheader} id={id} />
+          <SocialCardHeader title={title} date={date} id={id} />
           <SocialCardMain
             cardMediaTitle={cardMediaTitle}
             cardMediaImage={cardMediaImage}
