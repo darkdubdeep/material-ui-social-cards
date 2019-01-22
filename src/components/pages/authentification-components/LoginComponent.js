@@ -28,9 +28,6 @@ const styles = theme => ({
   margin: {
     margin: theme.spacing.unit
   },
-  button: {
-    margin: theme.spacing.unit
-  },
   withoutLabel: {
     marginTop: theme.spacing.unit * 3
   },

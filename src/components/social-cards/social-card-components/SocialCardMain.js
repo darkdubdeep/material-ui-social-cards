@@ -25,8 +25,7 @@ class SocialCardMain extends Component {
       classes,
       cardMediaTitle,
       cardMediaImage,
-      cardContentText,
-      id
+      cardContentText
     } = this.props;
     return (
       <Fragment>

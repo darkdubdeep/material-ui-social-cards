@@ -1,7 +1,8 @@
 import {
   GET_SOCIAL_CARDS,
   CREATE_SOCIAL_CARD,
-  EDIT_SOCIAL_CARD,
+  GET_SOCIAL_CARD_FOR_EDIT,
+  SAVE_EDITED_SOCIAL_CARD,
   DELETE_SOCIAL_CARD,
   VIEW_SOCIAL_CARD_DETAIL
 } from "./types";
@@ -54,7 +55,7 @@ export const getSocialCardsList = () => dispatch => {
     payload: res
   });
 };
-export const createSocialCard = payload => dispatch => {
+export const createSocialCard = payload => async dispatch => {
   // axios should be here in the future
   console.log(payload);
   dispatch({
@@ -62,11 +63,27 @@ export const createSocialCard = payload => dispatch => {
     payload: payload
   });
 };
-export const editSocialCard = () => dispatch => {
+
+export const getSocialCardForEdit = id => async dispatch => {
+  // axios should be here in the future
+  // const res = await axios.get(
+  //   `https://jsonplaceholder.typicode.com/users/${id}`
+  // );
+  dispatch({
+    type: GET_SOCIAL_CARD_FOR_EDIT,
+    payload: id // res.data
+  });
+};
+
+export const saveEditedSocialCard = () => async dispatch => {
+  // const res = await axios.put(
+  //   `https://jsonplaceholder.typicode.com/users/${contact.id}`,
+  //   contact
+  // );
   // axios should be here in the future
   dispatch({
-    type: EDIT_SOCIAL_CARD,
-    payload: true
+    type: SAVE_EDITED_SOCIAL_CARD,
+    payload: true // res.data
   });
 };
 export const deleteSocialCard = () => dispatch => {

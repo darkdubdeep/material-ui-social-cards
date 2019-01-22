@@ -42,7 +42,7 @@ class SocialCardBottom extends Component {
   };
 
   render() {
-    const { classes, cardBottomText, isFavorite } = this.props;
+    const { classes, cardBottomText } = this.props;
     return (
       <Fragment>
         <CardActions className={classes.actions} disableActionSpacing>

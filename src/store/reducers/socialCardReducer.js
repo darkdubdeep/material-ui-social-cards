@@ -1,7 +1,8 @@
 import {
   GET_SOCIAL_CARDS,
   CREATE_SOCIAL_CARD,
-  EDIT_SOCIAL_CARD,
+  GET_SOCIAL_CARD_FOR_EDIT,
+  SAVE_EDITED_SOCIAL_CARD,
   DELETE_SOCIAL_CARD,
   VIEW_SOCIAL_CARD_DETAIL
 } from "../actions/types";
@@ -23,7 +24,14 @@ export default function(state = initialState, action) {
         ...state,
         socialCards: [action.payload, ...state.socialCards]
       };
-    case EDIT_SOCIAL_CARD:
+    case GET_SOCIAL_CARD_FOR_EDIT:
+      return {
+        ...state,
+        socialCard: state.socialCards.find(
+          socialCard => socialCard.id == action.payload
+        )
+      };
+    case SAVE_EDITED_SOCIAL_CARD:
       return {
         ...state,
         socialCards: state.socialCards.map(socialCard =>

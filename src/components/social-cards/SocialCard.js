@@ -11,7 +11,8 @@ const styles = () => ({
   card: {
     maxWidth: 400,
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    minWidth: "95%"
   }
 });
 
