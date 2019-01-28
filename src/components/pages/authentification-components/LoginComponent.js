@@ -61,15 +61,15 @@ class LoginComponent extends Component {
 
     let from;
 
-    if (this.props.location.state) {
-      from = this.props.location.state.from.pathname || "/";
-    } else {
-      from = "/";
-    }
+    // if (this.props.location.state) {
+    //   from = this.props.location.state.from.pathname || "/";
+    // } else {
+    //   from = "/";
+    // }
 
     this.logginHandler = () => {
       this.props.loggIn(true);
-      this.props.history.push(from);
+      this.props.history.push("/");
     };
 
     return (

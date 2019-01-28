@@ -75,7 +75,7 @@ export const getSocialCardForEdit = id => async dispatch => {
   });
 };
 
-export const saveEditedSocialCard = () => async dispatch => {
+export const saveEditedSocialCard = payload => async dispatch => {
   // const res = await axios.put(
   //   `https://jsonplaceholder.typicode.com/users/${contact.id}`,
   //   contact
@@ -83,7 +83,7 @@ export const saveEditedSocialCard = () => async dispatch => {
   // axios should be here in the future
   dispatch({
     type: SAVE_EDITED_SOCIAL_CARD,
-    payload: true // res.data
+    payload: payload // res.data
   });
 };
 export const deleteSocialCard = () => dispatch => {
