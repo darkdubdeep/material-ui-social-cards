@@ -8,6 +8,7 @@ import red from "@material-ui/core/colors/red";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { getSocialCardForEdit } from "../../../store/actions/socialCardActions";
+import { deleteSocialCard } from "../../../store/actions/socialCardActions";
 
 import { withRouter } from "react-router-dom";
 
@@ -58,12 +59,14 @@ class SocialCardHeader extends Component {
   // }
 
   deleteCard = () => {
-    alert("Delete card");
+    const { id } = this.props;
+    this.props.deleteSocialCard(id);
     this.setState({ anchorEl: null });
   };
 
   render() {
     const { classes, title, date } = this.props;
+    console.log(date);
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     return (
@@ -84,7 +87,7 @@ class SocialCardHeader extends Component {
               </IconButton>
             }
             title={title}
-            date={date}
+            subheader={date}
           />
           <Menu
             id="long-menu"
@@ -112,7 +115,7 @@ class SocialCardHeader extends Component {
 
 SocialCardHeader.proptypes = {
   socialCard: PropTyoes.object.isRequired,
-  getSocialCardForEdit: PropTyoes.object.isRequired
+  getSocialCardForEdit: PropTyoes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -121,5 +124,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getSocialCardForEdit }
+  { getSocialCardForEdit, deleteSocialCard }
 )(withRouter(withStyles(styles)(SocialCardHeader)));

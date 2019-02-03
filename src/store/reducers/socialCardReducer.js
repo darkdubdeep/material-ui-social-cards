@@ -50,7 +50,9 @@ export default function(state = initialState, action) {
     case VIEW_SOCIAL_CARD_DETAIL:
       return {
         ...state,
-        socialCard: action.payload
+        socialCard: state.socialCards.find(
+          socialCard => socialCard.id == action.payload
+        )
       };
     default:
       return state;

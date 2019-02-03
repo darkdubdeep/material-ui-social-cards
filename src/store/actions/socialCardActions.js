@@ -86,17 +86,17 @@ export const saveEditedSocialCard = payload => async dispatch => {
     payload: payload // res.data
   });
 };
-export const deleteSocialCard = () => dispatch => {
+export const deleteSocialCard = payload => dispatch => {
   // axios should be here in the future
   dispatch({
     type: DELETE_SOCIAL_CARD,
-    payload: true
+    payload: payload
   });
 };
-export const viewSocialCarddetail = () => dispatch => {
+export const viewSocialCardDetail = id => dispatch => {
   // axios should be here in the future
   dispatch({
     type: VIEW_SOCIAL_CARD_DETAIL,
-    payload: true
+    payload: id
   });
 };

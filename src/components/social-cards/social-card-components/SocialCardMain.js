@@ -5,6 +5,14 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
+import { viewSocialCardDetail } from "../../../store/actions/socialCardActions";
+
+import store from "../../../store/store";
+
+import PropTyoes from "prop-types";
+import { Provider } from "react-redux";
+import { connect } from "react-redux";
+
 import { withRouter } from "react-router-dom";
 
 const styles = () => ({
@@ -17,6 +25,7 @@ const styles = () => ({
 class SocialCardMain extends Component {
   handleClick = event => {
     const { id } = this.props;
+    this.props.viewSocialCardDetail(id);
     this.props.history.push(`/social-card-detail/${id}`);
   };
 
@@ -43,4 +52,17 @@ class SocialCardMain extends Component {
     );
   }
 }
-export default withRouter(withStyles(styles)(SocialCardMain));
+
+SocialCardMain.proptypes = {
+  socialCard: PropTyoes.object.isRequired,
+  viewSocialCardDetail: PropTyoes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  socialCard: state.socialCard.socialCard
+});
+
+export default connect(
+  mapStateToProps,
+  { viewSocialCardDetail }
+)(withRouter(withStyles(styles)(SocialCardMain)));

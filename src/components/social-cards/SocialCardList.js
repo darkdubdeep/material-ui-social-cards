@@ -24,13 +24,18 @@ class SocialCardList extends Component {
 
   render() {
     const { classes, socialCards } = this.props;
+    let justify =
+      socialCards.length % 2 === 0 || socialCards.length === 1
+        ? "center"
+        : "flex-start";
+
     console.log(socialCards);
     return (
       <Grid
         className={classes.customGridWidth}
         container
         direction="row"
-        justify="center"
+        justify={justify}
         spacing={24}
         style={{
           margin: "auto",

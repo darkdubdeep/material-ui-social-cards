@@ -17,6 +17,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import CreateIcon from "@material-ui/icons/Create";
 import FilterNoneIcon from "@material-ui/icons/FilterNone";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 
 import { connect } from "react-redux";
 import { loggOut } from "../../store/actions/authenticationActions";
@@ -76,7 +77,8 @@ class HeaderNavigation extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, location } = this.props;
+    console.log(this.props);
 
     const sideList = (
       <div className={classes.list}>
@@ -106,14 +108,26 @@ class HeaderNavigation extends Component {
       <div>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-              onClick={this.toggleDrawer("left", true)}
-            >
-              <MenuIcon />
-            </IconButton>
+            {location.pathname !== "/" ? (
+              <IconButton
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="Menu"
+                onClick={this.goToCardList}
+              >
+                <KeyboardArrowLeft />
+              </IconButton>
+            ) : (
+              <IconButton
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="Menu"
+                onClick={this.toggleDrawer("left", true)}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
+
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Social Cards
             </Typography>

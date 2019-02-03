@@ -52,7 +52,7 @@ class SocialCardBottom extends Component {
           <IconButton aria-label="Share">
             <ShareIcon />
           </IconButton>
-          <IconButton
+          {/* <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded
             })}
@@ -61,7 +61,7 @@ class SocialCardBottom extends Component {
             aria-label="Show more"
           >
             <ExpandMoreIcon />
-          </IconButton>
+          </IconButton> */}
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
