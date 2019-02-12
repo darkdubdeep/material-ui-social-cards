@@ -4,7 +4,8 @@ import {
   GET_SOCIAL_CARD_FOR_EDIT,
   SAVE_EDITED_SOCIAL_CARD,
   DELETE_SOCIAL_CARD,
-  VIEW_SOCIAL_CARD_DETAIL
+  VIEW_SOCIAL_CARD_DETAIL,
+  SET_LOADING
 } from "./types";
 
 export const getSocialCardsList = () => dispatch => {
@@ -50,10 +51,23 @@ export const getSocialCardsList = () => dispatch => {
       isFavorite: true
     }
   ];
+  // axios request emulating for loading show
   dispatch({
-    type: GET_SOCIAL_CARDS,
-    payload: res
+    type: SET_LOADING,
+    payload: true
   });
+  setTimeout(() => {
+    dispatch({
+      type: GET_SOCIAL_CARDS,
+      payload: res
+    });
+  }, 2000);
+  setTimeout(() => {
+    dispatch({
+      type: SET_LOADING,
+      payload: false
+    });
+  }, 3000);
 };
 export const createSocialCard = payload => async dispatch => {
   // axios should be here in the future
@@ -69,6 +83,7 @@ export const getSocialCardForEdit = id => async dispatch => {
   // const res = await axios.get(
   //   `https://jsonplaceholder.typicode.com/users/${id}`
   // );
+
   dispatch({
     type: GET_SOCIAL_CARD_FOR_EDIT,
     payload: id // res.data
@@ -81,6 +96,7 @@ export const saveEditedSocialCard = payload => async dispatch => {
   //   contact
   // );
   // axios should be here in the future
+
   dispatch({
     type: SAVE_EDITED_SOCIAL_CARD,
     payload: payload // res.data

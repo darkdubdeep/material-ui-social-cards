@@ -185,8 +185,11 @@ class SocialCardEdit extends Component {
       cardContentText: "",
       cardBottomText: ""
     });
+    this.props.history.push("/");
+  };
 
-    // this.props.history.push("/");
+  cancelChanges = () => {
+    this.props.history.push("/");
   };
 
   render() {
@@ -308,7 +311,11 @@ class SocialCardEdit extends Component {
                   </Grid>
 
                   <Grid container justify="flex-end">
-                    <Button variant="outlined" className={classes.button}>
+                    <Button
+                      variant="outlined"
+                      className={classes.button}
+                      onClick={this.cancelChanges}
+                    >
                       Cancel
                     </Button>
                     <Button
@@ -333,7 +340,7 @@ class SocialCardEdit extends Component {
 SocialCardEdit.proptypes = {
   classes: PropTypes.object.isRequired,
   socialCard: PropTypes.object.isRequired,
-  getSocialCardForEdit: PropTypes.object.isRequired,
+  getSocialCardForEdit: PropTypes.func.isRequired,
   saveEditedSocialCard: PropTypes.func.isRequired
 };
 

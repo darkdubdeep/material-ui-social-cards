@@ -4,7 +4,8 @@ import {
   GET_SOCIAL_CARD_FOR_EDIT,
   SAVE_EDITED_SOCIAL_CARD,
   DELETE_SOCIAL_CARD,
-  VIEW_SOCIAL_CARD_DETAIL
+  VIEW_SOCIAL_CARD_DETAIL,
+  SET_LOADING
 } from "../actions/types";
 
 const initialState = {

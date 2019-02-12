@@ -3,7 +3,6 @@ import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
 import HeaderNavigation from "../layout/HeaderNavigation";
-import PropTyoes from "prop-types";
 import { Provider } from "react-redux";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
