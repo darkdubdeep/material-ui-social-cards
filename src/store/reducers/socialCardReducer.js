@@ -5,7 +5,7 @@ import {
   SAVE_EDITED_SOCIAL_CARD,
   DELETE_SOCIAL_CARD,
   VIEW_SOCIAL_CARD_DETAIL,
-  SET_LOADING
+  LIKE_SOCIAL_CARD
 } from "../actions/types";
 
 const initialState = {
@@ -54,6 +54,20 @@ export default function(state = initialState, action) {
         socialCard: state.socialCards.find(
           socialCard => socialCard.id == action.payload
         )
+      };
+    case LIKE_SOCIAL_CARD:
+      return {
+        ...state,
+        socialCards: state.socialCards.map(socialCard => {
+          if (socialCard.id === action.payload.id) {
+            let foundSocialCard;
+            foundSocialCard = socialCard;
+            foundSocialCard.isFavorite = action.payload.isFavorite;
+            return foundSocialCard;
+          } else {
+            return socialCard;
+          }
+        })
       };
     default:
       return state;

@@ -1,14 +1,16 @@
 import React, { Component, Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import classnames from "classnames";
-import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { likeSocialCard } from "../../../store/actions/socialCardActions";
+
+import PropTyoes from "prop-types";
+import { Provider } from "react-redux";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   card: {
@@ -31,45 +33,85 @@ const styles = theme => ({
   },
   expandOpen: {
     transform: "rotate(180deg)"
-  }
+  },
+  menuItem: {
+    "&:focus": {
+      backgroundColor: theme.palette.primary.main,
+      "& $primary, & $icon": {
+        color: theme.palette.common.white
+      }
+    }
+  },
+  primary: {},
+  icon: {}
 });
 
 class SocialCardBottom extends Component {
-  state = { expanded: false };
+  state = { expanded: false, anchorEl: null };
 
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  likeSocialCard = () => {
+    const { id, isFavorite } = this.props;
+    let payloadObj = {
+      id: id,
+      isFavorite: !isFavorite
+    };
+
+    console.log(payloadObj);
+    this.props.likeSocialCard(payloadObj);
   };
 
   render() {
-    const { classes, cardBottomText } = this.props;
+    const { classes, isFavorite } = this.props;
+    console.log(this.props);
+
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
     return (
       <Fragment>
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
+          <IconButton
+            aria-label="Add to favorites"
+            color={isFavorite ? "secondary" : "default"}
+            onClick={this.likeSocialCard}
+          >
             <FavoriteIcon />
           </IconButton>
-          <IconButton aria-label="Share">
+          <IconButton aria-label="Share" onClick={this.handleClick}>
             <ShareIcon />
           </IconButton>
-          {/* <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
+          <Menu
+            id="long-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={this.handleClose}
+            PaperProps={{
+              style: {
+                width: 120
+              }
+            }}
           >
-            <ExpandMoreIcon />
-          </IconButton> */}
+            <MenuItem onClick={this.handleClose}>Faceboook</MenuItem>
+            <MenuItem onClick={this.handleClose}> Linkedin</MenuItem>
+          </Menu>
         </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>{cardBottomText}</Typography>
-          </CardContent>
-        </Collapse>
       </Fragment>
     );
   }
 }
-export default withStyles(styles)(SocialCardBottom);
+
+const mapStateToProps = state => ({
+  socialCard: state.socialCard.socialCard
+});
+
+export default connect(
+  mapStateToProps,
+  { likeSocialCard }
+)(withStyles(styles)(SocialCardBottom));

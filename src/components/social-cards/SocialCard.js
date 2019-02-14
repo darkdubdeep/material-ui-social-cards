@@ -48,6 +48,7 @@ class SocialCard extends Component {
           <SocialCardBottom
             cardBottomText={cardBottomText}
             isFavorite={isFavorite}
+            id={id}
           />
         </Card>
       </Grid>

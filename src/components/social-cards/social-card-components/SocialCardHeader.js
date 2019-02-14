@@ -50,14 +50,6 @@ class SocialCardHeader extends Component {
     this.props.history.push(`/social-card-edit/${id}`);
   };
 
-  // componentDidUpdate(prevProps) {
-  //   // Typical usage (don't forget to compare props):
-  //   const { id } = this.props;
-  //   if (this.props.socialCard !== prevProps.socialCard) {
-  //     this.props.history.push(`/social-card-edit/${id}`);
-  //   }
-  // }
-
   deleteCard = () => {
     const { id } = this.props;
     this.props.deleteSocialCard(id);

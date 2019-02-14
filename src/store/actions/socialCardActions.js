@@ -5,7 +5,8 @@ import {
   SAVE_EDITED_SOCIAL_CARD,
   DELETE_SOCIAL_CARD,
   VIEW_SOCIAL_CARD_DETAIL,
-  SET_LOADING
+  SET_LOADING,
+  LIKE_SOCIAL_CARD
 } from "./types";
 
 export const getSocialCardsList = () => dispatch => {
@@ -61,13 +62,14 @@ export const getSocialCardsList = () => dispatch => {
       type: GET_SOCIAL_CARDS,
       payload: res
     });
-  }, 2000);
+  }, 300);
+
   setTimeout(() => {
     dispatch({
       type: SET_LOADING,
       payload: false
     });
-  }, 3000);
+  }, 500);
 };
 export const createSocialCard = payload => async dispatch => {
   // axios should be here in the future
@@ -114,5 +116,13 @@ export const viewSocialCardDetail = id => dispatch => {
   dispatch({
     type: VIEW_SOCIAL_CARD_DETAIL,
     payload: id
+  });
+};
+
+export const likeSocialCard = payload => dispatch => {
+  // axios should be here in the future
+  dispatch({
+    type: LIKE_SOCIAL_CARD,
+    payload: payload
   });
 };
