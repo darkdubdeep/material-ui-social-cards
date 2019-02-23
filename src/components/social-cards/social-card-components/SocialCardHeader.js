@@ -12,10 +12,7 @@ import { deleteSocialCard } from "../../../store/actions/socialCardActions";
 
 import { withRouter } from "react-router-dom";
 
-import store from "../../../store/store";
-
 import PropTyoes from "prop-types";
-import { Provider } from "react-redux";
 import { connect } from "react-redux";
 
 const styles = () => ({
@@ -62,45 +59,43 @@ class SocialCardHeader extends Component {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     return (
-      <Provider store={store}>
-        <Fragment>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="Recipe" className={classes.avatar}>
-                R
-              </Avatar>
+      <Fragment>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="Recipe" className={classes.avatar}>
+              R
+            </Avatar>
+          }
+          action={
+            <IconButton
+              className={classes.moreIconButton}
+              onClick={this.handleClick}
+            >
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={title}
+          subheader={date}
+        />
+        <Menu
+          id="long-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={this.handleClose}
+          PaperProps={{
+            style: {
+              width: 100
             }
-            action={
-              <IconButton
-                className={classes.moreIconButton}
-                onClick={this.handleClick}
-              >
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title={title}
-            subheader={date}
-          />
-          <Menu
-            id="long-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={this.handleClose}
-            PaperProps={{
-              style: {
-                width: 100
-              }
-            }}
-          >
-            <MenuItem key="edit" onClick={this.editCard}>
-              Edit
-            </MenuItem>
-            <MenuItem key="delete" onClick={this.deleteCard}>
-              Delete
-            </MenuItem>
-          </Menu>
-        </Fragment>
-      </Provider>
+          }}
+        >
+          <MenuItem key="edit" onClick={this.editCard}>
+            Edit
+          </MenuItem>
+          <MenuItem key="delete" onClick={this.deleteCard}>
+            Delete
+          </MenuItem>
+        </Menu>
+      </Fragment>
     );
   }
 }

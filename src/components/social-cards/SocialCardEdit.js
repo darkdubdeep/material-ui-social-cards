@@ -25,10 +25,8 @@ import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import IconButton from "@material-ui/core/IconButton";
 
-import store from "../../store/store";
-
 import PropTypes from "prop-types";
-import { Provider } from "react-redux";
+
 import { connect } from "react-redux";
 import { getSocialCardForEdit } from "../../store/actions/socialCardActions";
 import { saveEditedSocialCard } from "../../store/actions/socialCardActions";
@@ -171,7 +169,6 @@ class SocialCardEdit extends Component {
       cardBottomText
     };
 
-    console.log(updatedCard);
     this.props.saveEditedSocialCard(updatedCard);
 
     // Clear State
@@ -207,131 +204,129 @@ class SocialCardEdit extends Component {
     } = this.state;
     return (
       <MuiPickersUtilsProvider utils={LocalizedUtils} locale={enLocale}>
-        <Provider store={store}>
-          <Fragment>
-            <HeaderNavigation />
-            <Grid container justify="center">
-              <Grid
-                container
-                item
-                xs={12}
-                sm={4}
-                direction="column"
-                justify="center"
+        <Fragment>
+          <HeaderNavigation />
+          <Grid container justify="center">
+            <Grid
+              container
+              item
+              xs={12}
+              sm={4}
+              direction="column"
+              justify="center"
+            >
+              <form
+                className={classNames(
+                  classes.container,
+                  classes.createCardForm
+                )}
+                noValidate
+                autoComplete="off"
               >
-                <form
-                  className={classNames(
-                    classes.container,
-                    classes.createCardForm
-                  )}
-                  noValidate
-                  autoComplete="off"
+                <TextField
+                  id="title-text-input"
+                  name="title"
+                  value={title}
+                  label="Enter title"
+                  placeholder="Enter title"
+                  multiline
+                  className={classNames(classes.textField, classes.fullWidth)}
+                  margin="normal"
+                  variant="outlined"
+                  onChange={this.handleChange("title")}
+                />
+                <DatePicker
+                  margin="normal"
+                  variant="outlined"
+                  label="Enter date"
+                  value={date}
+                  onChange={this.handleDateChange}
+                  className={classNames(classes.textField, classes.fullWidth)}
+                  format="d MMM yyyy"
+                />
+                <TextField
+                  id="short-description"
+                  label="enter short description"
+                  placeholder="enter short description"
+                  value={cardContentText}
+                  multiline
+                  className={classNames(classes.textField, classes.fullWidth)}
+                  margin="normal"
+                  variant="outlined"
+                  onChange={this.handleChange("cardContentText")}
+                />
+                <TextField
+                  id="additional-text"
+                  label="enter additional text"
+                  placeholder="enter additional text"
+                  value={cardBottomText}
+                  multiline
+                  rows="4"
+                  className={classNames(classes.textField, classes.fullWidth)}
+                  margin="normal"
+                  variant="outlined"
+                  onChange={this.handleChange("cardBottomText")}
+                />
+                <Grid
+                  container
+                  justify="space-between"
+                  className={classNames(classes.fullWidth)}
                 >
-                  <TextField
-                    id="title-text-input"
-                    name="title"
-                    value={title}
-                    label="Enter title"
-                    placeholder="Enter title"
-                    multiline
-                    className={classNames(classes.textField, classes.fullWidth)}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange("title")}
-                  />
-                  <DatePicker
-                    margin="normal"
-                    variant="outlined"
-                    label="Enter date"
-                    value={date}
-                    onChange={this.handleDateChange}
-                    className={classNames(classes.textField, classes.fullWidth)}
-                    format="d MMM yyyy"
-                  />
-                  <TextField
-                    id="short-description"
-                    label="enter short description"
-                    placeholder="enter short description"
-                    value={cardContentText}
-                    multiline
-                    className={classNames(classes.textField, classes.fullWidth)}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange("cardContentText")}
-                  />
-                  <TextField
-                    id="additional-text"
-                    label="enter additional text"
-                    placeholder="enter additional text"
-                    value={cardBottomText}
-                    multiline
-                    rows="4"
-                    className={classNames(classes.textField, classes.fullWidth)}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange("cardBottomText")}
-                  />
-                  <Grid
-                    container
-                    justify="space-between"
-                    className={classNames(classes.fullWidth)}
-                  >
-                    <Grid item>
-                      <Card className={classes.card}>
-                        {this.state.cardMediaImage ? (
-                          <CardMedia
-                            className={classes.media}
-                            image={
-                              this.state.previewImage === null
-                                ? this.state.cardMediaImage
-                                : this.state.previewImage
-                            }
-                          />
-                        ) : null}
-                      </Card>
-                    </Grid>
-                    <Grid item>
-                      <input
-                        accept="image/*"
-                        className={classes.input}
-                        onChange={this.imageSelectedHandler}
-                        id="icon-button-file"
-                        type="file"
-                      />
-                      <label htmlFor="icon-button-file">
-                        <IconButton
-                          color="primary"
-                          className={classes.button}
-                          component="span"
-                        >
-                          <PhotoCamera />
-                        </IconButton>
-                      </label>
-                    </Grid>
+                  <Grid item>
+                    <Card className={classes.card}>
+                      {this.state.cardMediaImage ? (
+                        <CardMedia
+                          className={classes.media}
+                          image={
+                            this.state.previewImage === null
+                              ? this.state.cardMediaImage
+                              : this.state.previewImage
+                          }
+                        />
+                      ) : null}
+                    </Card>
                   </Grid>
+                  <Grid item>
+                    <input
+                      accept="image/*"
+                      className={classes.input}
+                      onChange={this.imageSelectedHandler}
+                      id="icon-button-file"
+                      type="file"
+                    />
+                    <label htmlFor="icon-button-file">
+                      <IconButton
+                        color="primary"
+                        className={classes.button}
+                        component="span"
+                      >
+                        <PhotoCamera />
+                      </IconButton>
+                    </label>
+                  </Grid>
+                </Grid>
 
-                  <Grid container justify="flex-end">
-                    <Button
-                      variant="outlined"
-                      className={classes.button}
-                      onClick={this.cancelChanges}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      className={classes.button}
-                      onClick={this.saveEditedCard}
-                    >
-                      Save
-                    </Button>
-                  </Grid>
-                </form>
-              </Grid>
+                <Grid container justify="flex-end">
+                  <Button
+                    variant="outlined"
+                    className={classes.button}
+                    onClick={this.cancelChanges}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className={classes.button}
+                    onClick={this.saveEditedCard}
+                  >
+                    Save
+                  </Button>
+                </Grid>
+              </form>
             </Grid>
-          </Fragment>
-        </Provider>
+          </Grid>
+        </Fragment>
       </MuiPickersUtilsProvider>
     );
   }

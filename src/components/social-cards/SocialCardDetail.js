@@ -3,7 +3,6 @@ import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
 import HeaderNavigation from "../layout/HeaderNavigation";
-import { Provider } from "react-redux";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -14,8 +13,6 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
 import PropTypes from "prop-types";
-
-import store from "../../store/store";
 
 const styles = theme => ({
   container: {
@@ -86,7 +83,6 @@ class SocialCardDetail extends Component {
       cardBottomText,
       isFavorite
     } = this.props.socialCard;
-    console.log(this.props);
 
     this.setState({
       id,
@@ -113,39 +109,37 @@ class SocialCardDetail extends Component {
     } = this.state;
     const { classes } = this.props;
     return (
-      <Provider store={store}>
-        <Fragment>
-          <HeaderNavigation />
+      <Fragment>
+        <HeaderNavigation />
 
-          <Grid container justify="center">
-            <Grid item xs={6} item>
-              <Paper className={classes.paper} elevation={5}>
-                <Typography variant="h5" component="h3">
-                  {title}
-                </Typography>
-                <Typography component="p" className={classes.p}>
-                  {date}
-                </Typography>
+        <Grid container justify="center">
+          <Grid item xs={6} item>
+            <Paper className={classes.paper} elevation={5}>
+              <Typography variant="h5" component="h3">
+                {title}
+              </Typography>
+              <Typography component="p" className={classes.p}>
+                {date}
+              </Typography>
 
-                <Typography component="p" className={classes.p}>
-                  {cardContentText}
-                </Typography>
+              <Typography component="p" className={classes.p}>
+                {cardContentText}
+              </Typography>
 
-                {this.state.cardMediaImage ? (
-                  <CardMedia
-                    className={classes.media}
-                    image={this.state.cardMediaImage}
-                  />
-                ) : null}
+              {this.state.cardMediaImage ? (
+                <CardMedia
+                  className={classes.media}
+                  image={this.state.cardMediaImage}
+                />
+              ) : null}
 
-                <Typography component="p" className={classes.p}>
-                  {cardBottomText}
-                </Typography>
-              </Paper>
-            </Grid>
+              <Typography component="p" className={classes.p}>
+                {cardBottomText}
+              </Typography>
+            </Paper>
           </Grid>
-        </Fragment>
-      </Provider>
+        </Grid>
+      </Fragment>
     );
   }
 }

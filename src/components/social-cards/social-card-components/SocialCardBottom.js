@@ -9,7 +9,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { likeSocialCard } from "../../../store/actions/socialCardActions";
 
 import PropTyoes from "prop-types";
-import { Provider } from "react-redux";
 import { connect } from "react-redux";
 
 const styles = theme => ({
@@ -70,7 +69,6 @@ class SocialCardBottom extends Component {
 
   render() {
     const { classes, isFavorite } = this.props;
-    console.log(this.props);
 
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);

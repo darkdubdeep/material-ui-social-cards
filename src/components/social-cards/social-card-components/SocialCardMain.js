@@ -7,10 +7,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 
 import { viewSocialCardDetail } from "../../../store/actions/socialCardActions";
 
-import store from "../../../store/store";
-
 import PropTyoes from "prop-types";
-import { Provider } from "react-redux";
 import { connect } from "react-redux";
 
 import { withRouter } from "react-router-dom";
