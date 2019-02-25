@@ -25,6 +25,7 @@ const styles = theme => ({
 class SocialCardList extends Component {
   componentDidMount() {
     this.props.getSocialCardsList();
+    console.log(this.props.getSocialCardsList);
   }
 
   render() {

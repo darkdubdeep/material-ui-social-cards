@@ -1,7 +1,7 @@
 import { LOGG_IN, LOGG_OUT } from "../actions/types";
 
 const initialState = {
-  logged: false
+  logged: JSON.parse(localStorage.getItem("logged")) ? true : false
 };
 
 export default function(state = initialState, action) {

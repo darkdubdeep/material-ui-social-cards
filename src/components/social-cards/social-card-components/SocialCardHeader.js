@@ -75,7 +75,7 @@ class SocialCardHeader extends Component {
             </IconButton>
           }
           title={title}
-          subheader={date}
+          subheader={date.toString()}
         />
         <Menu
           id="long-menu"
