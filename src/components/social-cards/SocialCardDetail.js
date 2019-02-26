@@ -12,6 +12,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
+import { viewSocialCardDetail } from "../../store/actions/socialCardActions";
 import PropTypes from "prop-types";
 
 const styles = theme => ({
@@ -62,58 +63,32 @@ const styles = theme => ({
 });
 
 class SocialCardDetail extends Component {
-  state = {
-    title: "",
-    date: "",
-    selectedImageObject: null,
-    previewImage: null,
-    cardMediaImage: "",
-    cardContentText: "",
-    cardBottomText: "",
-    isFavorite: false
-  };
-
   componentDidMount() {
-    const {
-      id,
-      title,
-      date,
-      cardMediaImage,
-      cardContentText,
-      cardBottomText,
-      isFavorite
-    } = this.props.socialCard;
-
-    this.setState({
-      id,
-      title,
-      date,
-      cardMediaImage,
-      cardContentText,
-      cardBottomText,
-      isFavorite
-    });
+    const { id } = this.props.match.params;
+    this.props.viewSocialCardDetail(id);
   }
 
   render() {
-    const { id } = this.props.match.params;
+    if (!this.props.socialCard) {
+      return <h1> loading...</h1>;
+    }
+
     const {
       title,
-      pictures,
       date,
-      selectedImageObject,
       cardMediaImage,
-      previewImage,
       cardContentText,
       cardBottomText
-    } = this.state;
+    } = this.props.socialCard;
+
     const { classes } = this.props;
+
     return (
       <Fragment>
         <HeaderNavigation />
 
         <Grid container justify="center">
-          <Grid item xs={6} item>
+          <Grid item xs={6}>
             <Paper className={classes.paper} elevation={5}>
               <Typography variant="h5" component="h3">
                 {title}
@@ -126,11 +101,8 @@ class SocialCardDetail extends Component {
                 {cardContentText}
               </Typography>
 
-              {this.state.cardMediaImage ? (
-                <CardMedia
-                  className={classes.media}
-                  image={this.state.cardMediaImage}
-                />
+              {cardMediaImage ? (
+                <CardMedia className={classes.media} image={cardMediaImage} />
               ) : null}
 
               <Typography component="p" className={classes.p}>
@@ -156,6 +128,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    {}
+    { viewSocialCardDetail }
   )(withStyles(styles)(SocialCardDetail))
 );

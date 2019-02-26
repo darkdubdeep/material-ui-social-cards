@@ -22,7 +22,7 @@ const styles = () => ({
 class SocialCardMain extends Component {
   handleClick = event => {
     const { id } = this.props;
-    this.props.viewSocialCardDetail(id);
+    // this.props.viewSocialCardDetail(id);
     this.props.history.push(`/social-card-detail/${id}`);
   };
 

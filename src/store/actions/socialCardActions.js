@@ -73,7 +73,6 @@ export const getSocialCardsList = () => dispatch => {
 };
 export const createSocialCard = payload => async dispatch => {
   // axios should be here in the future
-  console.log(payload);
   dispatch({
     type: CREATE_SOCIAL_CARD,
     payload: payload
@@ -113,6 +112,7 @@ export const deleteSocialCard = payload => dispatch => {
 };
 export const viewSocialCardDetail = id => dispatch => {
   // axios should be here in the future
+  console.log(id);
   dispatch({
     type: VIEW_SOCIAL_CARD_DETAIL,
     payload: id

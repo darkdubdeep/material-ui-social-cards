@@ -25,7 +25,6 @@ const styles = theme => ({
 class SocialCardList extends Component {
   componentDidMount() {
     this.props.getSocialCardsList();
-    console.log(this.props.getSocialCardsList);
   }
 
   render() {
@@ -35,7 +34,6 @@ class SocialCardList extends Component {
         ? "center"
         : "flex-start";
 
-    console.log(this.props);
     if (isFetching && !socialCards.length) {
       return (
         <CircularProgress className={classes.progress} color="secondary" />
