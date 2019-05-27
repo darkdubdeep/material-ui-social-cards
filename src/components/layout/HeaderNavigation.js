@@ -1,40 +1,42 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import CreateIcon from "@material-ui/icons/Create";
-import FilterNoneIcon from "@material-ui/icons/FilterNone";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import CreateIcon from '@material-ui/icons/Create';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FilterNoneIcon from '@material-ui/icons/FilterNone';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 
-import { connect } from "react-redux";
-import { loggOut } from "../../store/actions/authenticationActions";
-import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { loggOut } from '../../store/actions/authenticationActions';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const styles = {
   list: {
     width: 250
   },
   fullList: {
-    width: "auto"
+    width: 'auto'
   },
   root: {
     flexGrow: 1,
     // Disable scroll capabilities.
-    touchAction: "none"
+    touchAction: 'none'
   },
   grow: {
     flexGrow: 1
@@ -47,12 +49,20 @@ const styles = {
 
 const drawerMenuItems = [
   {
-    name: "Cards list",
-    to: "/"
+    name: 'Cards list',
+    to: '/'
   },
   {
-    name: "Create card",
-    to: "/social-card-create"
+    name: 'Create card',
+    to: '/social-card-create'
+  },
+  {
+    name: 'Show favorites',
+    to: '/'
+  },
+  {
+    name: 'Show all',
+    to: '/'
   }
 ];
 
@@ -69,24 +79,52 @@ class HeaderNavigation extends Component {
 
   loggOutHandler = () => {
     this.props.loggOut(true);
-    this.props.history.push("/login");
+    this.props.history.push('/login');
   };
 
   goToCardList = () => {
-    this.props.history.push("/");
+    this.props.history.push('/');
+  };
+
+  showFavorites = () => {
+    console.log('showFavorites');
+  };
+  showAll = () => {
+    console.log('showAll');
   };
 
   render() {
     const { classes, location } = this.props;
-    console.log(this.props);
 
     const sideList = (
       <div className={classes.list}>
         <List>
           {drawerMenuItems.map((item, index) => (
-            <ListItem component={Link} to={item.to} button key={item.name}>
+            <ListItem
+              component={Link}
+              to={item.to}
+              button
+              key={item.name}
+              onClick={
+                item.name === 'Show favorites'
+                  ? this.showFavorites
+                  : item.name === 'Show all'
+                  ? this.showAll
+                  : undefined
+              }
+            >
               <ListItemIcon>
-                {index % 2 === 0 ? <FilterNoneIcon /> : <CreateIcon />}
+                {item.name === 'Cards list' ? (
+                  <FilterNoneIcon />
+                ) : item.name === 'Create card' ? (
+                  <CreateIcon />
+                ) : item.name === 'Show favorites' ? (
+                  <FavoriteIcon />
+                ) : item.name === 'Show all' ? (
+                  <FavoriteBorderIcon />
+                ) : (
+                  undefined
+                )}
               </ListItemIcon>
               <ListItemText primary={item.name} />
             </ListItem>
@@ -94,11 +132,11 @@ class HeaderNavigation extends Component {
         </List>
         <Divider />
         <List>
-          <ListItem button key="logout" onClick={this.loggOutHandler}>
+          <ListItem button key='logout' onClick={this.loggOutHandler}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText primary="Logout" />
+            <ListItemText primary='Logout' />
           </ListItem>
         </List>
       </div>
@@ -106,13 +144,13 @@ class HeaderNavigation extends Component {
 
     return (
       <div>
-        <AppBar position="static">
+        <AppBar position='static'>
           <Toolbar>
-            {location.pathname !== "/" ? (
+            {location.pathname !== '/' ? (
               <IconButton
                 className={classes.menuButton}
-                color="inherit"
-                aria-label="Menu"
+                color='inherit'
+                aria-label='Menu'
                 onClick={this.goToCardList}
               >
                 <KeyboardArrowLeft />
@@ -120,32 +158,32 @@ class HeaderNavigation extends Component {
             ) : (
               <IconButton
                 className={classes.menuButton}
-                color="inherit"
-                aria-label="Menu"
-                onClick={this.toggleDrawer("left", true)}
+                color='inherit'
+                aria-label='Menu'
+                onClick={this.toggleDrawer('left', true)}
               >
                 <MenuIcon />
               </IconButton>
             )}
 
-            <Typography variant="h6" color="inherit" className={classes.grow}>
+            <Typography variant='h6' color='inherit' className={classes.grow}>
               Social Cards
             </Typography>
-            <Button color="inherit" onClick={this.loggOutHandler}>
+            <Button color='inherit' onClick={this.loggOutHandler}>
               Logout
             </Button>
           </Toolbar>
         </AppBar>
         <SwipeableDrawer
           open={this.state.left}
-          onClose={this.toggleDrawer("left", false)}
-          onOpen={this.toggleDrawer("left", true)}
+          onClose={this.toggleDrawer('left', false)}
+          onOpen={this.toggleDrawer('left', true)}
         >
           <div
             tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer("left", false)}
-            onKeyDown={this.toggleDrawer("left", false)}
+            role='button'
+            onClick={this.toggleDrawer('left', false)}
+            onKeyDown={this.toggleDrawer('left', false)}
           >
             {sideList}
           </div>
