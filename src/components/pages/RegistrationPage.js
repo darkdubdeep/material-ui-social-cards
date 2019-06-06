@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import RegistrationComponent from "./authentification-components/RegistrationComponent";
-import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import RegistrationComponent from './authentification-components/RegistrationComponent';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   root: {
@@ -17,10 +17,10 @@ class RegistrationPage extends Component {
         <Grid
           container
           spacing={24}
-          justify="center"
+          justify='center'
           style={{
             margin: 0,
-            width: "100%"
+            width: '100%'
           }}
         >
           <Grid item xs={12} sm={3}>
