@@ -1,7 +1,12 @@
-import { SET_LOADING } from "../actions/types";
+import {
+  SET_LOADING,
+  HIDE_SERVER_ERROR,
+  SHOW_SERVER_ERROR
+} from '../actions/types';
 
 const initialState = {
-  isFetching: false
+  isFetching: false,
+  serverError: ''
 };
 
 export default function(state = initialState, action) {
@@ -10,6 +15,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isFetching: action.payload
+      };
+    case SHOW_SERVER_ERROR:
+      return {
+        ...state,
+        serverError: action.payload.statusText
+      };
+    case HIDE_SERVER_ERROR:
+      return {
+        ...state,
+        serverError: ''
       };
     default:
       return state;

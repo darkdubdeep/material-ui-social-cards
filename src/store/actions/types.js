@@ -14,3 +14,5 @@ export const LIKE_SOCIAL_CARD = 'LIKE_SOCIAL_CARD';
 
 // shared actions
 export const SET_LOADING = 'SET_LOADING';
+export const SHOW_SERVER_ERROR = 'SET_SERVER_ERROR';
+export const HIDE_SERVER_ERROR = 'HIDE_SERVER_ERROR';

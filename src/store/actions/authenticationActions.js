@@ -1,4 +1,10 @@
-import { LOGG_IN, LOGG_OUT, REGISTER_USER, SET_LOADING } from './types';
+import {
+  LOGG_IN,
+  LOGG_OUT,
+  REGISTER_USER,
+  SET_LOADING,
+  SHOW_SERVER_ERROR
+} from './types';
 import axios from 'axios';
 
 const apiUrl = 'http://127.0.0.1:8000/api';
@@ -21,14 +27,13 @@ export const registerUser = body => dispatch => {
       }
     })
     .then(response => {
-      console.log(response);
       loadingIndicator(dispatch, false);
-      dispatch({
-        type: SET_LOADING,
-        payload: false
-      });
     })
     .catch(error => {
+      dispatch({
+        type: SHOW_SERVER_ERROR,
+        payload: error.response
+      });
       loadingIndicator(dispatch, false);
       throw error;
     });

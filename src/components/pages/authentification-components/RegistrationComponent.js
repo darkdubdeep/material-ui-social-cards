@@ -3,10 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -18,6 +15,8 @@ import { withRouter } from 'react-router-dom';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { TextField } from '@material-ui/core';
+
+import ErrorSnackbar from './../../shared/ErrorSnackbar';
 
 const styles = theme => ({
   root: {
@@ -48,13 +47,6 @@ const styles = theme => ({
     marginTop: 250
   }
 });
-
-// validation functions
-const required = value => (value == null ? 'Required' : undefined);
-const email = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email'
-    : undefined;
 
 class RegistrationComponent extends Component {
   state = {
@@ -134,7 +126,6 @@ class RegistrationComponent extends Component {
       ) {
         const password_confirmation = passwordConfirmation;
         const body = { name, password, password_confirmation, email };
-        console.log(body);
         this.props.registerUser(body);
       }
     });
@@ -143,7 +134,7 @@ class RegistrationComponent extends Component {
   };
 
   render() {
-    const { classes, isFetching } = this.props;
+    const { classes, isFetching, serverError } = this.props;
     if (isFetching) {
       return (
         <CircularProgress className={classes.progress} color='secondary' />
@@ -152,6 +143,7 @@ class RegistrationComponent extends Component {
     return (
       <div className={classes.root}>
         <h2>Please enter your information</h2>
+        <ErrorSnackbar serverError={serverError} />
         <TextField
           label='Name'
           className={classNames(classes.textField, classes.fullWidth)}
@@ -237,11 +229,13 @@ class RegistrationComponent extends Component {
 RegistrationComponent.propTypes = {
   classes: PropTypes.object.isRequired,
   registerUser: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired
+  isFetching: PropTypes.bool.isRequired,
+  serverError: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
-  isFetching: state.shared.isFetching
+  isFetching: state.shared.isFetching,
+  serverError: state.shared.serverError
 });
 
 export default withRouter(
