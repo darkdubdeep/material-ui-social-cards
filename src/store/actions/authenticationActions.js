@@ -1,9 +1,9 @@
 import {
   LOGG_IN,
   LOGG_OUT,
-  REGISTER_USER,
   SET_LOADING,
-  SHOW_SERVER_ERROR
+  SHOW_SERVER_ERROR,
+  SHOW_SERVER_SUCESS
 } from './types';
 import axios from 'axios';
 
@@ -27,12 +27,17 @@ export const registerUser = body => dispatch => {
       }
     })
     .then(response => {
+      console.log(response);
+      dispatch({
+        type: SHOW_SERVER_SUCESS,
+        payload: response.data.message
+      });
       loadingIndicator(dispatch, false);
     })
     .catch(error => {
       dispatch({
         type: SHOW_SERVER_ERROR,
-        payload: error.response
+        payload: error.response.data.message
       });
       loadingIndicator(dispatch, false);
       throw error;

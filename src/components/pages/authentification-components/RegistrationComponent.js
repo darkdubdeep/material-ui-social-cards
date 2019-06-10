@@ -18,6 +18,8 @@ import { TextField } from '@material-ui/core';
 
 import ErrorSnackbar from './../../shared/ErrorSnackbar';
 
+import { Redirect } from 'react-router-dom';
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -134,7 +136,8 @@ class RegistrationComponent extends Component {
   };
 
   render() {
-    const { classes, isFetching, serverError } = this.props;
+    const { classes, isFetching, serverError, serverSuccess } = this.props;
+    console.log(serverSuccess);
     if (isFetching) {
       return (
         <CircularProgress className={classes.progress} color='secondary' />
@@ -144,6 +147,9 @@ class RegistrationComponent extends Component {
       <div className={classes.root}>
         <h2>Please enter your information</h2>
         <ErrorSnackbar serverError={serverError} />
+
+        {serverSuccess && <Redirect to={'/'} />}
+
         <TextField
           label='Name'
           className={classNames(classes.textField, classes.fullWidth)}
@@ -230,12 +236,14 @@ RegistrationComponent.propTypes = {
   classes: PropTypes.object.isRequired,
   registerUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  serverError: PropTypes.string.isRequired
+  serverError: PropTypes.string.isRequired,
+  serverSuccess: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   isFetching: state.shared.isFetching,
-  serverError: state.shared.serverError
+  serverError: state.shared.serverError,
+  serverSuccess: state.shared.serverSuccess
 });
 
 export default withRouter(
