@@ -3,7 +3,7 @@ import {
   LOGG_OUT,
   SET_LOADING,
   SHOW_SERVER_ERROR,
-  SHOW_SERVER_SUCESS
+  SHOW_SERVER_SUCCESS
 } from './types';
 import axios from 'axios';
 
@@ -29,7 +29,7 @@ export const registerUser = body => dispatch => {
     .then(response => {
       console.log(response);
       dispatch({
-        type: SHOW_SERVER_SUCESS,
+        type: SHOW_SERVER_SUCCESS,
         payload: response.data.message
       });
       loadingIndicator(dispatch, false);

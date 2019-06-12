@@ -1,4 +1,9 @@
-import { SET_LOADING, HIDE_SERVER_ERROR, SHOW_SERVER_SUCESS } from './types';
+import {
+  SET_LOADING,
+  HIDE_SERVER_ERROR,
+  SHOW_SERVER_SUCCESS,
+  HIDE_SERVER_SUCCESS
+} from './types';
 
 export const setLoading = dispatch => {
   dispatch({
@@ -16,5 +21,11 @@ export const showServerSuccess = body => dispatch => {
   dispatch({
     type: HIDE_SERVER_ERROR,
     payload: true
+  });
+};
+export const hideServerSuccess = body => dispatch => {
+  dispatch({
+    type: HIDE_SERVER_SUCCESS,
+    payload: ''
   });
 };

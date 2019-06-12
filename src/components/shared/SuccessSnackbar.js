@@ -8,15 +8,21 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { hideServerError } from '../../store/actions/sharedActions';
+import { hideServerSuccess } from '../../store/actions/sharedActions';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import green from '@material-ui/core/colors/green';
 
 const variantIcon = {
-  error: ErrorIcon
+  error: ErrorIcon,
+  success: CheckCircleIcon
 };
 
 const styles1 = theme => ({
   error: {
     backgroundColor: theme.palette.error.dark
+  },
+  success: {
+    backgroundColor: green[600]
   },
   icon: {
     fontSize: 20
@@ -66,7 +72,7 @@ MySnackbarContent.propTypes = {
   className: PropTypes.string,
   message: PropTypes.node,
   onClose: PropTypes.func,
-  variant: PropTypes.oneOf(['error']).isRequired
+  variant: PropTypes.oneOf(['success']).isRequired
 };
 
 const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
@@ -77,7 +83,7 @@ const styles2 = theme => ({
   }
 });
 
-class ErrorSnackbar extends React.Component {
+class SuccessSnackbar extends React.Component {
   state = {
     open: false
   };
@@ -90,13 +96,13 @@ class ErrorSnackbar extends React.Component {
     if (reason === 'clickaway') {
       return;
     }
-    this.props.hideServerError();
+    this.props.hideServerSuccess();
   };
 
   render() {
-    const { serverError } = this.props;
-    console.log('serverError');
-    console.log(serverError);
+    const { serverSuccess } = this.props;
+    console.log('serverSuccess');
+    console.log(serverSuccess);
     return (
       <div>
         <Snackbar
@@ -104,14 +110,14 @@ class ErrorSnackbar extends React.Component {
             vertical: 'bottom',
             horizontal: 'right'
           }}
-          open={serverError ? true : false}
-          autoHideDuration={3000}
+          open={serverSuccess.length ? true : false}
+          autoHideDuration={1000}
           onClose={this.handleClose}
         >
           <MySnackbarContentWrapper
             onClose={this.handleClose}
-            variant='error'
-            message={serverError}
+            variant='success'
+            message={serverSuccess}
           />
         </Snackbar>
       </div>
@@ -119,12 +125,12 @@ class ErrorSnackbar extends React.Component {
   }
 }
 
-ErrorSnackbar.propTypes = {
+SuccessSnackbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  hideServerError: PropTypes.func.isRequired
+  hideServerSuccess: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { hideServerError }
-)(withStyles(styles2)(ErrorSnackbar));
+  { hideServerSuccess }
+)(withStyles(styles2)(SuccessSnackbar));

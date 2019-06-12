@@ -18,7 +18,7 @@ import { TextField } from '@material-ui/core';
 
 import ErrorSnackbar from './../../shared/ErrorSnackbar';
 
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -137,7 +137,6 @@ class RegistrationComponent extends Component {
 
   render() {
     const { classes, isFetching, serverError, serverSuccess } = this.props;
-    console.log(serverSuccess);
     if (isFetching) {
       return (
         <CircularProgress className={classes.progress} color='secondary' />
@@ -227,6 +226,12 @@ class RegistrationComponent extends Component {
         >
           Register
         </Button>
+        <p>
+          if you have an accaunt, please{' '}
+          <span>
+            <Link to='/'>login</Link>
+          </span>{' '}
+        </p>
       </div>
     );
   }
